@@ -1,0 +1,23 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build (-Wall -Wextra -Werror)
+        run: make all check
+
+      - name: Edge cases and every strategy
+        run: make test
+
+      - name: Rebuild with ASan + UBSan and re-test
+        run: |
+          make debug
+          ./tests/errors.sh
+          for s in --simple --medium --complex --turk --adaptive; do
+            ./tests/run.sh 100 5 "$s"
+          done

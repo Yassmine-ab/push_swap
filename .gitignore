@@ -1,0 +1,18 @@
+# Build artifacts
+/obj/
+/lib/obj/
+*.o
+*.d
+*.a
+*.out
+/push_swap
+/checker
+
+# 42: subject and external checkers must not be committed
+*.pdf
+/checker_linux
+/fedora_checker
+
+# Editor / OS
+.vscode/
+.DS_Store
